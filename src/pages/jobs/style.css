@@ -415,6 +415,7 @@ img {
 .phone-input select {
   width: 50%; 
   margin-right: 5px; 
+  padding: 0 10px;
 }
 
 

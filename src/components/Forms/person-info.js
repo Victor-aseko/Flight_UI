@@ -138,7 +138,7 @@ export const PersonlInfo = ({ setSelectedTab, tab, action, booking }) => {
                   placeholder="title"
                   value={userInfo?.title}
                   onChange={changeHandler}
-                  style={!valid.title ? { border: "1px solid red" } : {}}
+                  style={!valid.title ? { border: "1px solid red" } : {padding: "0px 10px"}}
                   onFocus={focusHandler}
                 >
                   <option>Mr.</option>

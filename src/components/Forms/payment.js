@@ -123,7 +123,7 @@ export const Payment = ({ setSelectedTab }) => {
                     <label htmlFor="expiration-month">Month</label>
                     <select
                       id="expiration-month"
-                      style={{ width: "100%" }}
+                      style={{ width: "100%", padding: "0px 10px" }}
                       className="form-control"
                       name="month"
                       onChange={e =>
@@ -152,7 +152,7 @@ export const Payment = ({ setSelectedTab }) => {
                     <label className="expiration-year">Year</label>
                     <select
                       id="experation-year"
-                      style={{ width: "100%" }}
+                      style={{ width: "100%" ,padding: "0px 10px" }}
                       className="form-control"
                       name="year"
                       onChange={e =>

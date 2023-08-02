@@ -183,7 +183,7 @@ export const SearchForm = props => {
                 as="select"
                 name="class"
                 placeholder="class"
-                style={!validation.class ? { border: "1px solid red" } : {}}
+                style={!validation.class ? { border: "1px solid red" } : {padding: "0px 10px"}}
                 onChange={e =>
                   setForm(prev => {
                     return { ...prev, class: e.target.value };
@@ -201,7 +201,7 @@ export const SearchForm = props => {
                 as="select"
                 name="numOfPassengers"
                 placeholder="Number of Passengers"
-                style={!validation.passengers ? { border: "1px solid red" } : {}}
+                style={!validation.passengers ? { border: "1px solid red" } : {padding: "0px 10px"}}
                 onChange={e =>
                   setForm(prev => {
                     return { ...prev, passengers: e.target.value };
