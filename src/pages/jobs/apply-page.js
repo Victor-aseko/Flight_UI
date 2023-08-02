@@ -33,7 +33,7 @@ export const Application = () => {
     } else {
       nav("/Jobs");
     }
-  }, []);
+  }, [nav, state]);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -46,6 +46,10 @@ export const Application = () => {
       body: JSON.stringify(jsonObj(userInfo, job._id)),
     });
     if (res.ok) {
+      setSnackBar(true);
+      setTimeout(() => {
+        nav("/Apply");
+      }, 3000);
     }
   };
 
@@ -112,7 +116,6 @@ export const Application = () => {
                   </div>
                 </div>
               </div>
-
               <div class="textarea_control">
                 <label for="email"> Email </label>
                 <input type="email" id="email" name="email" className="form-control" placeholder="johndoe@example.com" onChange={changeHandler} />
@@ -134,9 +137,13 @@ export const Application = () => {
               </div>
             </div>
             <div class="button_container">
-              <button className="btn-submit" type="submit" onClick={handleSubmit}>
-                Submit
-              </button>
+              {!snackBar ? (
+                <button className="btn-submit" type="submit" onClick={handleSubmit}>
+                  Submit
+                </button>
+              ) : (
+                <p>Your application will be reviewed shortly and a reponse sent to you</p>
+              )}
             </div>
           </form>
         </div>

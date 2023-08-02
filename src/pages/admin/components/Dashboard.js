@@ -3,11 +3,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-function Dashboard() {
+function Dashboard({ setEmployeeMatch }) {
   const { user } = useSelector(state => state.authReducer);
   const [cards, setCards] = useState([
     { title: "Earnings", icon: "bi bi-credit-card", color: "bg-tertiary", data: "" },
-    { title: "Shecduled Flights", icon: "bi bi-credit-card", color: "bg-primary", data: "" },
+    { title: "Scheduled Flights", icon: "bi bi-credit-card", color: "bg-primary", data: "" },
     { title: "Flight Hours", icon: "bi bi-credit-card", color: "bg-info", data: "" },
     { title: "Employee matches", icon: "bi bi-credit-card", color: "bg-warning", data: "" },
   ]);
@@ -21,9 +21,10 @@ function Dashboard() {
       console.log(data);
       if (data.summary) {
         setSummary(data.summary);
+        setEmployeeMatch(data.summary.jobs);
         const summaryData = cards.map(c => {
           if (c.title === "Earnings") return { ...c, data: data.summary.payment };
-          else if (c.title === "Shecduled Flights") return { ...c, data: data.summary.scheduledFlights };
+          else if (c.title === "Scheduled Flights") return { ...c, data: data.summary.scheduledFlights };
           else if (c.title === "Flight Hours") return { ...c, data: data.summary.flightHours };
           else {
             return { ...c, data: data.summary.employeeMatch };

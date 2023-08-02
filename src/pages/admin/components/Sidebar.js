@@ -1,6 +1,7 @@
 import React from "react";
 import { NotificationCard } from "./NotificationCard";
 import { Link } from "react-router-dom";
+import logo from "../../../img/logo.png";
 
 function Sidebar({ setActiveTab }) {
   return (
@@ -21,8 +22,9 @@ function Sidebar({ setActiveTab }) {
           <span className="navbar-toggler-icon"></span>
         </button>
         <Link className="navbar-brand py-lg-2 mb-lg-5 px-lg-6 me-0" to={"/"}>
-          {/* Add an image here */}
-          Booking Io
+          <div className="logo">
+            <img src={logo} alt="logo" />
+          </div>
         </Link>
         <div className="navbar-user d-lg-none">
           <div className="dropdown">

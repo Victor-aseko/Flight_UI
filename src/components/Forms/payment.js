@@ -77,148 +77,153 @@ export const Payment = ({ setSelectedTab }) => {
   const img = [visa, mastercard, discover, paypal, mpesa];
   return (
     <div className="payment-container">
-    <div className="form-content">
-      <div className="payment-wrapper">
-        <div className="tab-wrapper">
-          <form encType="text/plain" method="get" target="_blank" onSubmit={submitHandler}>
-            <div className="cards">
-              {/* <p>Accepted cards:</p> */}
-              {cards(img)}
-            </div>
-            <div className="fieldset half">
-              <div className="field">
-                <label htmlFor="full-name">Card Holder Full Name</label>
-                <input
-                  id="full-name"
-                  className="form-control"
-                  placeholder="Satoshi Nakamoto"
-                  name="cardHolderFullName"
-                  style={{ border: !validation.cardHolderFullName ? "1px solid red" : "" }}
-                  onFocus={focusHandler}
-                  type="text"
-                  value={paymentForm.cardHolderFullName}
-                  onChange={changeHandler}
-                />
+      <div className="form-content">
+        <div className="payment-wrapper">
+          <div className="tab-wrapper">
+            <form encType="text/plain" method="get" target="_blank" onSubmit={submitHandler}>
+              <div className="cards">
+                {/* <p>Accepted cards:</p> */}
+                {cards(img)}
               </div>
+              <div className="fieldset half">
+                <div className="field">
+                  <label htmlFor="full-name">Card Holder Full Name</label>
+                  <input
+                    id="full-name"
+                    className="form-control"
+                    placeholder="Satoshi Nakamoto"
+                    name="cardHolderFullName"
+                    style={{ border: !validation.cardHolderFullName ? "1px solid red" : "" }}
+                    onFocus={focusHandler}
+                    type="text"
+                    value={paymentForm.cardHolderFullName}
+                    onChange={changeHandler}
+                  />
+                </div>
 
-              <div className="field">
-                <label htmlFor="credit-card-num">Card Number</label>
-                <input
-                  id="credit-card-num"
-                  className="form-control"
-                  placeholder="1111-2222-3333-4444"
-                  type="number"
-                  name="cardNumber"
-                  style={{ border: !validation.cardNumber ? "1px solid red" : "" }}
-                  value={paymentForm.cardNumber}
-                  onChange={changeHandler}
-                  onFocus={focusHandler}
-                />
+                <div className="field">
+                  <label htmlFor="credit-card-num">Card Number</label>
+                  <input
+                    id="credit-card-num"
+                    className="form-control"
+                    placeholder="1111-2222-3333-4444"
+                    type="number"
+                    name="cardNumber"
+                    style={{ border: !validation.cardNumber ? "1px solid red" : "" }}
+                    value={paymentForm.cardNumber}
+                    onChange={changeHandler}
+                    onFocus={focusHandler}
+                  />
+                </div>
               </div>
-            </div>
-            <div>
-              <p className="expires">Expires on:</p>
-              <div className="card-experation">
-                <div className="fieldset quarter">
-                  <div className="field">
-                    <label htmlFor="expiration-month">Month</label>
-                    <select
-                      id="expiration-month"
-                      style={{ width: "100%", padding: "0px 10px" }}
-                      className="form-control"
-                      name="month"
-                      onChange={e =>
-                        setPaymentForm(prev => {
-                          return { ...prev, month: e.target.value };
-                        })
-                      }
-                      onFocus={focusHandler}
-                    >
-                      <option value="">Month:</option>
-                      <option value="">January</option>
-                      <option value="">February</option>
-                      <option value="">March</option>
-                      <option value="">April</option>
-                      <option value="">May</option>
-                      <option value="">June</option>
-                      <option value="">July</option>
-                      <option value="">August</option>
-                      <option value="">September</option>
-                      <option value="">October</option>
-                      <option value="">November</option>
-                      <option value="">Decemeber</option>
-                    </select>
-                  </div>
-                  <div className="field">
-                    <label className="expiration-year">Year</label>
-                    <select
-                      id="experation-year"
-                      style={{ width: "100%" ,padding: "0px 10px" }}
-                      className="form-control"
-                      name="year"
-                      onChange={e =>
-                        setPaymentForm(prev => {
-                          return { ...prev, year: e.target.value };
-                        })
-                      }
-                      onFocus={focusHandler}
-                    >
-                      <option value="">Year</option>
-                      <option value="">2023</option>
-                      <option value="">2024</option>
-                      <option value="">2025</option>
-                      <option value="">2026</option>
-                    </select>
-                  </div>
-                  <div className="field">
-                    <label for="cvv">CVV</label>
-                    <input
-                      style={{ width: "100%", border: !validation.cvv ? "1px solid red" : "" }}
-                      id="cvv"
-                      className="form-control"
-                      placeholder="415"
-                      type="text"
-                      name="cvv"
-                      value={paymentForm.cvv}
-                      onFocus={focusHandler}
-                      onChange={changeHandler}
-                    />
-                  </div>
-                  <div className="field">
-                    <Link
-                      className="cvv-info"
-                      href="https://en.wikipedia.org/wiki/CVV#:~:text=Card%20Verification%20Value%2C%20also%20known,Renaissance%20photographer%20and%20portrait%20artist"
-                      target="_blank"
-                    >
-                      What is CVV?
-                    </Link>
+              <div>
+                <p className="expires">Expires on:</p>
+                <div className="card-experation">
+                  <div className="fieldset quarter">
+                    <div className="field">
+                      <label htmlFor="expiration-month">Month</label>
+                      <select
+                        id="expiration-month"
+                        style={{ width: "100%", padding: "0px 10px" }}
+                        className="form-control"
+                        name="month"
+                        onChange={e =>
+                          setPaymentForm(prev => {
+                            return { ...prev, month: e.target.value };
+                          })
+                        }
+                        onFocus={focusHandler}
+                      >
+                        <option value="">Month:</option>
+                        <option value="">January</option>
+                        <option value="">February</option>
+                        <option value="">March</option>
+                        <option value="">April</option>
+                        <option value="">May</option>
+                        <option value="">June</option>
+                        <option value="">July</option>
+                        <option value="">August</option>
+                        <option value="">September</option>
+                        <option value="">October</option>
+                        <option value="">November</option>
+                        <option value="">Decemeber</option>
+                      </select>
+                    </div>
+                    <div className="field">
+                      <label className="expiration-year">Year</label>
+                      <select
+                        id="experation-year"
+                        style={{ width: "100%", padding: "0px 10px" }}
+                        className="form-control"
+                        name="year"
+                        onChange={e =>
+                          setPaymentForm(prev => {
+                            return { ...prev, year: e.target.value };
+                          })
+                        }
+                        onFocus={focusHandler}
+                      >
+                        <option value="">Year</option>
+                        <option value="">2023</option>
+                        <option value="">2024</option>
+                        <option value="">2025</option>
+                        <option value="">2026</option>
+                      </select>
+                    </div>
+                    <div className="field">
+                      <label for="cvv">CVV</label>
+                      <input
+                        style={{ width: "100%", border: !validation.cvv ? "1px solid red" : "" }}
+                        id="cvv"
+                        className="form-control"
+                        placeholder="415"
+                        type="text"
+                        name="cvv"
+                        value={paymentForm.cvv}
+                        onFocus={focusHandler}
+                        onChange={changeHandler}
+                      />
+                    </div>
+                    <div className="field">
+                      <Link
+                        className="cvv-info"
+                        href="https://en.wikipedia.org/wiki/CVV#:~:text=Card%20Verification%20Value%2C%20also%20known,Renaissance%20photographer%20and%20portrait%20artist"
+                        target="_blank"
+                      >
+                        What is CVV?
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
+              <button
+                type="submit"
+                name="btn-primary"
+                value="Next"
+                id="round_trip_btn"
+                className="btn-primary btn-submit-form btn-rnd-trip"
+                // onClick={handlerSubmit}
+              >
+                Pay Now
+              </button>
+            </form>
+            <div>
+              <p className="footer-text">
+                <FaLock />
+                Your credit card information is encrypted
+              </p>
             </div>
-            <button
-              type="submit"
-              name="btn-primary"
-              value="Next"
-              id="round_trip_btn"
-              className="btn-primary btn-submit-form btn-rnd-trip"
-              // onClick={handlerSubmit}
-            >
-              Pay Now
-            </button>
-          </form>
-          <div>
-            <p className="footer-text">
-              <FaLock />
-              Your credit card information is encrypted
-            </p>
           </div>
         </div>
+        {showPop && (
+          <Pop
+            text={"Please fill in the previous forms details before making payments"}
+            okText={"Ok"}
+            yesHandler={okHandler}
+            doNotShowCancel={true}
+          />
+        )}
       </div>
-      {showPop && (
-        <Pop text={"Please fill in the previous forms details before making payments"} okText={"Ok"} yesHandler={okHandler} doNotShowCancel={true} />
-      )}
-    </div>
     </div>
   );
 };

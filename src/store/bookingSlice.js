@@ -31,6 +31,8 @@ const bookingSlice = createSlice({
       state.pendingBooking = action.payload;
     },
     createUserBookigInfo(state, action) {
+      console.log("=============================PAYLOAD=====================");
+      console.log(action.payload);
       state.bookingUserInfo = [action.payload];
     },
     createPassengers(state, action) {

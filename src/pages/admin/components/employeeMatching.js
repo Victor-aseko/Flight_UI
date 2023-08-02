@@ -1,204 +1,148 @@
-import React, { useEffect, useState } from 'react'
-//import { Header } from "../../components/header/header";
+import React, { useEffect, useState } from "react";
+import { useReactToPrint } from "react-to-print";
 
-import 'bootstrap-icons/font/bootstrap-icons.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-//import { Header } from "../../components/header/header";
-import 'bootstrap-icons/font/bootstrap-icons.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./employeeMatching.css";
+import { useRef } from "react";
 
-import './employeeMatching.css'
+export const EmployeeMatching = ({ employeeMatch }) => {
+  const [applicants, setApplicants] = useState([]);
 
-export const EmployeeMatching = () => {
-	const [applicants, setApplicants] = useState([])
-	const [selectedApplicant, setSelectedApplicant] = useState(null)
-	const [toggle, setToggle] = useState(true)
-	const Toggle = () => {
-		setToggle(!toggle)
-	}
+  const successRef = useRef();
 
-	useEffect(() => {
-		// Mock API call to fetch job applicants and their applied jobs
-		// Replace this with your actual API call to fetch data from the backend
-		setTimeout(() => {
-			const mockApplicants = [
-				{
-					id: 1,
-					name: 'John Doe',
-					appliedJob: 'Flight Attendant',
-					status: 'Pending',
-					cv: 'CV for John Doe'
-				},
-				{
-					id: 2,
-					name: 'Jane Smith',
-					appliedJob: 'Airport Security',
-					status: 'Pending',
-					cv: 'CV for Jane Smith'
-				},
-				{
-					id: 3,
-					name: 'Bob Johnson',
-					appliedJob: 'Baggage Handler',
-					status: 'Pending',
-					cv: 'CV for Bob Johnson'
-				}
-				// Add more mock data here
-			]
-			setApplicants(mockApplicants)
-		}, 1000) // Simulate a 1-second delay to fetch data
-	}, [])
+  useEffect(() => {
+    setApplicants(employeeMatch);
+  }, [employeeMatch]);
 
-	const handleAction = (applicantId, action) => {
-		if (action === 'Accepted') {
-			// Update the status to "Approved" if the "Accept" button is clicked
-			const updatedApplicants = applicants.map((applicant) =>
-				applicant.id === applicantId
-					? { ...applicant, status: 'Approved' }
-					: applicant
-			)
-			setApplicants(updatedApplicants)
-		} else if (action === 'Declined') {
-			const confirmation = window.confirm(
-				'Are you sure you want to decline this applicant?'
-			)
-			if (confirmation) {
-				const updatedApplicants = applicants.map((applicant) =>
-					applicant.id === applicantId
-						? { ...applicant, status: 'Declined' }
-						: applicant
-				)
-				setApplicants(updatedApplicants)
-			}
-		}
-	}
+  const changeStatusEmployeee = async (application, action) => {
+    const res = await fetch(`https://flight-booking-server-3zln.vercel.app/flight/update-application`, {
+      method: "POST",
+      body: JSON.stringify({ id: application._id, status: action }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (res.ok) {
+      if (action === "success") {
+        setApplicants(prev => {
+          return prev.map(p => {
+            if (p._id === application._id) return { ...p, status: "success" };
+            return p;
+          });
+        });
+      } else
+        setApplicants(prev => {
+          return prev.filter(p => p._id !== application._id);
+        });
+    }
+    const data = await res.json();
+    console.log("==========================RESPONSE DATA====================");
+    console.log(data);
+  };
 
-	const handleViewCV = (applicantCV) => {
-		// Show the CV details in a modal or separate section
-		setSelectedApplicant(applicantCV)
-	}
+  console.log(applicants);
 
-	const handlePrintSuccessfulMatches = () => {
-		const successfulMatches = applicants.filter(
-			(applicant) => applicant.status === 'Approved'
-		)
-		printSuccessfulApplicants(successfulMatches)
-	}
+  const printMatches = useReactToPrint({
+    content: () => successRef.current,
+  });
 
-	const printSuccessfulApplicants = (successfulMatches) => {
-		const printWindow = window.open('', '_blank')
-		printWindow.document.write(
-			'<html><head><title>Approved Applicants</title></head><body>'
-		)
-		printWindow.document.write(
-			'<h1 style="text-align: center;">Approved Applicants</h1>'
-		)
-		printWindow.document.write(
-			'<table style="border-collapse: collapse; width: 100%;">'
-		)
-		printWindow.document.write(
-			"<thead><tr><th style='border: 1px solid black; padding: 5px;'>Applicant ID</th>"
-		)
-		printWindow.document.write(
-			"<th style='border: 1px solid black; padding: 5px;'>Full Names</th>"
-		)
-		printWindow.document.write(
-			"<th style='border: 1px solid black; padding: 5px;'>Applied Job</th></tr></thead>"
-		)
-		printWindow.document.write('<tbody>')
-		successfulMatches.forEach((applicant) => {
-			printWindow.document.write('<tr>')
-			printWindow.document.write(
-				`<td style='border: 1px solid black; padding: 5px;'>${applicant.id}</td>`
-			)
-			printWindow.document.write(
-				`<td style='border: 1px solid black; padding: 5px;'>${applicant.name}</td>`
-			)
-			printWindow.document.write(
-				`<td style='border: 1px solid black; padding: 5px;'>${applicant.appliedJob}</td>`
-			)
-			printWindow.document.write('</tr>')
-		})
-		printWindow.document.write('</tbody></table>')
-		printWindow.document.write('</body></html>')
-		printWindow.document.close()
-		printWindow.print()
-	}
+  return (
+    <>
+      <main className="py-6 bg-surface-secondary">
+        <div className="container-fluid">
+          <h2 className="title">pending Applicantions</h2>
+          <div className="table-responsive">
+            <table className="table table-hover table-nowrap">
+              <thead className="thead-light">
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">email</th>
+                  <th scope="col">Phone no.</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              {applicants?.map(b => {
+                if (b.status === "pending") return <tbody>{TableRow(b, changeStatusEmployeee)}</tbody>;
+              })}
+            </table>
+          </div>
+        </div>
+        <div className="container-fluid my-2" ref={successRef}>
+          <h2 className="title">success Applicantions</h2>
+          <div className="table-responsive">
+            <table className="table table-hover table-nowrap">
+              <thead className="thead-light">
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">email</th>
+                  <th scope="col">Phone no.</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              {applicants?.map(b => {
+                if (b.status === "success") return <tbody>{TableRow(b, changeStatusEmployeee)}</tbody>;
+              })}
+            </table>
+          </div>
+        </div>
+      </main>
 
-	return (
-		<div className="row ">
-			<div className="airport-container">
-				<h2 className="title">Airport Job Applicants</h2>
-				<table className="applicants-table">
-					<thead>
-						<tr>
-							<th className="header">Applicant ID</th>
-							<th className="header">Full Names</th>
-							<th className="header">Applied Job</th>
-							<th className="header">CV</th>
-							<th className="header">Status</th>
-							<th className="header-one">Action</th>
-							{/* <th className="header">Print</th> */}
-						</tr>
-					</thead>
-					<tbody>
-						{applicants.map((applicant) => (
-							<tr key={applicant.id}>
-								<td className="detail">{applicant.id}</td>
-								<td className="detail">{applicant.name}</td>
-								<td className="detail">{applicant.appliedJob}</td>
-								<td className="detail">
-									<button
-										onClick={() => handleViewCV(applicant.cv)}
-										className="button"
-									>
-										View CV
-									</button>
-								</td>
-								<td className={`status ${applicant.status.toLowerCase()}`}>
-									{applicant.status}
-								</td>
-								<td>
-									<button
-										onClick={() => handleAction(applicant.id, 'Accepted')}
-										className="button"
-									>
-										Accept
-									</button>
-									<button
-										onClick={() => handleAction(applicant.id, 'Declined')}
-										className="button"
-									>
-										Decline
-									</button>
-									<button
-										onClick={handlePrintSuccessfulMatches}
-										className="button"
-									>
-										Print
-									</button>
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
+      {!!applicants?.find(p => p.status === "success") && (
+        <div style={{ display: "flex", justifyContent: "center", margin: "1rem 0rem" }}>
+          <button type="button" style={{ borderRadius: ".8rem" }} onClick={printMatches}>
+            Print success matches
+          </button>
+        </div>
+      )}
+    </>
+    // </div>
+  );
+};
 
-				{/* Modal or separate section to view the CV */}
-				{selectedApplicant && (
-					<div className="view-cv">
-						<h3>CV Details</h3>
-						<p>{selectedApplicant}</p>
-						<button
-							onClick={() => setSelectedApplicant(null)}
-							className="button"
-						>
-							Close
-						</button>
-					</div>
-				)}
-			</div>
-		</div>
-		// </div>
-	)
-}
+export const TableRow = (b, deleteBooking) => {
+  return (
+    <tr>
+      <td>
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+        <a className="text-heading font-semibold" href="#">
+          {b?.fullName}
+        </a>
+      </td>
+      <td>{b?.email}</td>
+      <td>
+        <p className="text-heading font-semibold">{b?.phoneNo}</p>
+      </td>
+      <td>{b?.role}</td>
+      <td>
+        <span className="badge badge-lg badge-dot">
+          <i className="bg-success"></i>
+          {b.status}
+        </span>
+      </td>
+      <td className="text-end row">
+        {b.status === "pending" ? (
+          <>
+            <button type="button" className="btn btn-sm btn-square btn-neutral text-danger-hover" onClick={() => deleteBooking(b, "success")}>
+              <i className="bi bi-check2"></i>
+            </button>
+            <button type="button" className="btn btn-sm btn-square btn-neutral text-danger-hover" onClick={() => deleteBooking(b, "reject")}>
+              <i className="bi bi-x"></i>
+            </button>
+          </>
+        ) : (
+          <button type="button" className="btn btn-sm btn-square btn-neutral text-danger-hover" onClick={() => deleteBooking(b, "delete")}>
+            <i className="bi bi-trash"></i>
+          </button>
+        )}
+      </td>
+    </tr>
+  );
+};

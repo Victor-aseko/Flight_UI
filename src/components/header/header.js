@@ -47,11 +47,14 @@ export const Header = () => {
                       Jobs
                     </Link>
                   </li>
-                  <li className="has-children">
-                    <Link style={{ textDecoration: "none" }} to={"/Admin"}>
-                      Admin
-                    </Link>
-                  </li>
+                  {user.level === "admin" && (
+                    <li className="has-children">
+                      <Link style={{ textDecoration: "none" }} to={"/Admin"}>
+                        Admin
+                      </Link>
+                    </li>
+                  )}
+
                   <li className="has-children" onClick={logoutHandler}>
                     <Link>logout</Link>
                   </li>
@@ -65,7 +68,7 @@ export const Header = () => {
               display: "flex",
               flexDirection: "row",
               justifyContent: "flex-end",
-              padding: ".2rem 0rem",
+              padding: "1.2rem 0rem",
             }}
           >
             <Button onClick={() => navigation("/Login")} style={{ margin: "0rem .8rem" }}>

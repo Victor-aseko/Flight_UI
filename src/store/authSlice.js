@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   user: {
     email: "",
+    level: "user",
   },
 };
 const authSlice = createSlice({

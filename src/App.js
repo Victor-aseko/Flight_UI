@@ -32,6 +32,7 @@ const App = () => {
         <Route path="/Login" element={<Login />} />
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/Booking" element={<BookingPage />} />
+
         <Route path="/Admin" element={renderRestrictedComponent(Admin)} />
         <Route path="/TicketEdit" element={renderRestrictedComponent(TicketEditing)} />
 

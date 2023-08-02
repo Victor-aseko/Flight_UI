@@ -8,9 +8,9 @@ import { Pencil } from "react-bootstrap-icons";
 
 export const PersonlInfo = ({ setSelectedTab, tab, action, booking }) => {
   const { bookingUserInfo, pendingBooking } = useSelector(state => state.bookingReducer);
-  const [userInfo, setUserInfo] = useState({ title: "Mr.", firstName: "", lastName: "", DOB: "", number: "", email: "" });
+  const [userInfo, setUserInfo] = useState({ title: "Mr.", firstName: "", lastName: "", dob: "", phoneNo: "", email: "" });
   const [personInfo, setPersonalInfo] = useState();
-  const [valid, setValid] = useState({ title: true, firstName: true, lastName: true, DOB: true });
+  const [valid, setValid] = useState({ title: true, firstName: true, lastName: true, dob: true });
   const [selectedCountryCode, setSelectedCountryCode] = useState("");
 
   const [passengerBookings, setPassengersBookings] = useState();
@@ -28,7 +28,7 @@ export const PersonlInfo = ({ setSelectedTab, tab, action, booking }) => {
       title: !!userInfo.title,
       firstName: !!userInfo.firstName,
       lastName: !!userInfo.lastName,
-      DOB: !!userInfo.DOB,
+      dob: !!userInfo.dob,
     };
     setValid(validationObj);
     const isValid = Object.values(validationObj).every(isValid => isValid);
@@ -38,14 +38,16 @@ export const PersonlInfo = ({ setSelectedTab, tab, action, booking }) => {
   const handlerSubmit = () => {
     const isValid = validHandler();
     if (!isValid || (tab === "addPassenger" && +pendingBooking.passengers !== bookingUserInfo.length)) return;
+    console.log("-------------------USER INFO---------------------");
     if (tab !== "addPassenger") {
+      console.log(userInfo);
       dispatch(bookingActions.createUserBookigInfo(userInfo));
       if (!action) {
         dispatch(
           bookingActions.createPendingBooking({
             ...pendingBooking,
             passengersInfo: [
-              { fullName: userInfo.firstName + " " + userInfo.lastName, email: userInfo.email, phoneNo: userInfo.number, dob: userInfo.DOB },
+              { fullName: userInfo.firstName + " " + userInfo.lastName, email: userInfo.email, phoneNo: userInfo.phoneNo, dob: userInfo.dob },
             ],
           })
         );
@@ -54,7 +56,7 @@ export const PersonlInfo = ({ setSelectedTab, tab, action, booking }) => {
       }
 
       if (pendingBooking.passengers > 1) {
-        setUserInfo({ title: "Mr.", firstName: "", lastName: "", DOB: "", number: "", email: "" });
+        setUserInfo({ title: "Mr.", firstName: "", lastName: "", dob: "", phoneNo: "", email: "" });
         return setSelectedTab("addPassenger");
       } else setSelectedTab("seatSelect");
     } else setSelectedTab("seatSelect");
@@ -68,16 +70,16 @@ export const PersonlInfo = ({ setSelectedTab, tab, action, booking }) => {
         console.log("======================PREVIOUS VALUE==============================");
         console.log(prev);
         const passengersInfo = {
-          dob: userInfo.DOB,
+          dob: userInfo.dob,
           email: userInfo.email,
           fullName: userInfo.firstName + " " + userInfo.lastName,
-          phoneNo: userInfo.number,
+          phoneNo: userInfo.phoneNo,
         };
         const passengersInfos = passengerBookings ? [...passengerBookings?.passengersInfo, passengersInfo] : [passengersInfo];
         return { ...prev, passengersInfo: passengersInfos };
       });
     if (+pendingBooking.passengers - bookingUserInfo.length !== 1)
-      setUserInfo({ title: "Mr.", firstName: "", lastName: "", DOB: "", number: "", email: "" });
+      setUserInfo({ title: "Mr.", firstName: "", lastName: "", dob: "", phoneNo: "", email: "" });
   };
 
   const changeHandler = e => {
@@ -92,7 +94,7 @@ export const PersonlInfo = ({ setSelectedTab, tab, action, booking }) => {
   };
 
   const focusHandler = () => {
-    setValid({ title: true, firstName: true, lastName: true, DOB: true });
+    setValid({ title: true, firstName: true, lastName: true, dob: true });
   };
 
   const Edithandler = async () => {
@@ -138,7 +140,7 @@ export const PersonlInfo = ({ setSelectedTab, tab, action, booking }) => {
                   placeholder="title"
                   value={userInfo?.title}
                   onChange={changeHandler}
-                  style={!valid.title ? { border: "1px solid red" } : {padding: "0px 10px"}}
+                  style={!valid.title ? { border: "1px solid red" } : { padding: "0px 10px" }}
                   onFocus={focusHandler}
                 >
                   <option>Mr.</option>
@@ -193,16 +195,16 @@ export const PersonlInfo = ({ setSelectedTab, tab, action, booking }) => {
                 </label>
                 <div className="date-field-wrapper date-depart">
                   <input
-                    name="DOB"
+                    name="dob"
                     type="date"
                     className="form-control"
                     placeholder="mm-dd-yyyy"
                     style={{
                       width: "100%",
-                      border: !valid.DOB ? "1px solid red" : "",
+                      border: !valid.dob ? "1px solid red" : "",
                     }}
                     onFocus={focusHandler}
-                    value={userInfo?.DOB}
+                    value={userInfo?.dob}
                     onChange={changeHandler}
                   />
                 </div>
@@ -229,12 +231,12 @@ export const PersonlInfo = ({ setSelectedTab, tab, action, booking }) => {
                     ))}
                   </Form.Control>
                   <input
-                    name="phoneNumber"
+                    name="phoneNo"
                     type="tel"
                     id="rndTripPromoCode"
                     className="form-control"
                     placeholder="712 345 678"
-                    value={userInfo?.phoneNumber}
+                    value={userInfo?.phoneNo}
                     onChange={changeHandler}
                   />
                 </div>
@@ -362,11 +364,11 @@ export const PersonlInfo = ({ setSelectedTab, tab, action, booking }) => {
                               style={{ cursor: "pointer", margin: "0.3rem 0rem" }}
                               onClick={() => {
                                 setUserInfo({
-                                  DOB: passenger.dob,
+                                  dob: passenger.dob,
                                   firstName: fName,
                                   lastName: lName,
                                   email: passenger.email,
-                                  number: passenger.phoneNo,
+                                  phoneNo: passenger.phoneNo,
                                 });
                                 if (targetDivRef.current) targetDivRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
                               }}
@@ -381,7 +383,7 @@ export const PersonlInfo = ({ setSelectedTab, tab, action, booking }) => {
                       <tr key={index.toString()}>
                         <td>{passenger.firstName}</td>
                         <td>${passenger.lastName}</td>
-                        <td>{passenger.DOB}</td>
+                        <td>{passenger.dob}</td>
                       </tr>
                     );
                   })}
