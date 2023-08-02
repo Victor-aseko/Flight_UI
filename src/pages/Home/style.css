@@ -16,18 +16,12 @@
  justify-content: center;
 }
 
-.Search-section{
- margin-top: -200px;
+.Search-section .search-flight p{
+ color: white;
 }
 
-@media (max-width: 1333px) {
-  
-  .Search-section {
-    margin-top: -30px;
-  }
-}
-@media (max-width: 670px) {
-  .Search-section {
-    margin-top: -200px;
-  }
+@media only screen and (max-width: 620px){
+  .Search-section .search-flight p{
+    color: rgb(59, 59, 59);
+   }
 }

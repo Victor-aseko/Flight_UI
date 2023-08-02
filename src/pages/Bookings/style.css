@@ -66,6 +66,12 @@
   color: #5a5a5a;
 }
 
+.bookings .table thead th{
+  color: white;
+  /* text-transform: lowercase; */
+  border: none;
+}
+
 .buttons {
   display: flex;
   justify-content: space-between;
@@ -78,6 +84,7 @@
   align-items: start;
   max-width: 900px;
   margin: 0 auto;
+  padding: 0 20px 10px;
 }
 
 .container-inquiries h4 {

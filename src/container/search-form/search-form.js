@@ -226,12 +226,12 @@ export const SearchForm = props => {
           <div className="table">
             <table>
               <thead>
-                <tr>
-                  <th>Flight Name</th>
-                  <th>Departure Time</th>
-                  <th>Arrival Time</th>
-                  <th>Fare</th>
-                  <th>Status</th>
+                <tr >
+                  <th style={{ color: "white"}}>Flight Name</th>
+                  <th style={{ color: "white"}}>Departure Time</th>
+                  <th style={{ color: "white"}}>Arrival Time</th>
+                  <th style={{ color: "white"}}>Fare</th>
+                  <th style={{ color: "white"}}>Status</th>
                   <th></th>
                 </tr>
               </thead>
