@@ -76,6 +76,7 @@ export const Payment = ({ setSelectedTab }) => {
   };
   const img = [visa, mastercard, discover, paypal, mpesa];
   return (
+    <div className="payment-container">
     <div className="form-content">
       <div className="payment-wrapper">
         <div className="tab-wrapper">
@@ -217,6 +218,7 @@ export const Payment = ({ setSelectedTab }) => {
       {showPop && (
         <Pop text={"Please fill in the previous forms details before making payments"} okText={"Ok"} yesHandler={okHandler} doNotShowCancel={true} />
       )}
+    </div>
     </div>
   );
 };

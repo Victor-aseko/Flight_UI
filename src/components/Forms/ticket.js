@@ -82,7 +82,7 @@ export const Ticket = () => {
           </div>
         </div>
       </div>
-      <div style={{ display: "flex", justifyContent: "center", borderRadius: "12px", padding: "1rem 0rem" }}>
+      <div style={{ display: "flex", justifyContent: "center", borderRadius: "12px", padding: "1rem 0rem", backgroundColor: "rgb(252, 252, 252, 0.8)"}}>
         <button onClick={handlePrint}>print Ticket</button>
       </div>
     </>
