@@ -17,7 +17,8 @@ function Dashboard() {
     (async () => {
       const res = await fetch(`https://flight-booking-server-3zln.vercel.app/flight/get-summary/${user.email}`);
       const data = await res.json();
-
+      console.log("============================SUMMARY DATA==========================");
+      console.log(data);
       if (data.summary) {
         setSummary(data.summary);
         const summaryData = cards.map(c => {

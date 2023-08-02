@@ -54,8 +54,8 @@ const bookingSlice = createSlice({
       state.bookingUserInfo = state.bookingUserInfo.splice(0, 1);
     },
     clear(state) {
+      console.log("===============clear==============================");
       state.bookingUserInfo = [];
-
       state.bookings = [];
       state.pendingBooking = {};
       state.seatsSelected = [];

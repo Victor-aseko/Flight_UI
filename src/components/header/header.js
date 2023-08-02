@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "../../styles/style.css";
 import { authActions } from "../../store/authSlice";
 import logo from "../../img/logo.png";
+import { bookingActions } from "../../store/bookingSlice";
 
 export const Header = () => {
   const user = useSelector(state => state.authReducer.user);
@@ -14,6 +15,7 @@ export const Header = () => {
 
   const dispatch = useDispatch();
   const logoutHandler = () => {
+    dispatch(bookingActions.clear());
     dispatch(authActions.logout());
     navigation("/");
   };

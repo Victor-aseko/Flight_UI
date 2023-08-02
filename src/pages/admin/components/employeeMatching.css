@@ -1,17 +1,20 @@
 .airport-container {
 	padding: 20px;
 	font-family: Arial, sans-serif;
+	margin-top: 50px;
 }
 
 .applicants-table {
-	width: 80%;
+	width: 90%;
 	border-collapse: collapse;
-	margin-top: 20px;
-	margin-left: 18rem;
+	margin-left: 5rem;
+	border: 1px solid #ccc; /* Add a 1px solid border */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 .title {
-	color: white;
-	margin-left: 18rem;
+	color: black;
+	text-align: center;
+	margin-top: 40px;
 }
 .header,
 .detail {
