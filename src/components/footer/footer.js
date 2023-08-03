@@ -4,7 +4,6 @@ import "./footer.css";
 // import "../Forms/bootstrap.min.css";
 
 export const Footer = () => {
-
   return (
     <section id="footer" class="footer">
       <div className="footer-content">
@@ -26,26 +25,22 @@ export const Footer = () => {
               <h4>Useful Links</h4>
               <ul>
                 <li>
-                  <i className="bi bi-chevron-right"></i> 
+                  <i className="bi bi-chevron-right"></i>
                   <Link style={{ textDecoration: "none" }} to={"/"}>
-                      Home
-                    </Link>
+                    Home
+                  </Link>
                 </li>
                 <li>
                   <i className="bi bi-chevron-right"></i>
                   <Link style={{ textDecoration: "none" }} to={"/Bookings"}>
-                      Bookings
-                    </Link>
+                    Bookings
+                  </Link>
                 </li>
                 <li>
                   <i className="bi bi-chevron-right"></i>
                   <Link style={{ textDecoration: "none" }} to={"/Jobs"}>
-                      Jobs
-                    </Link>
-                </li>
-                <li>
-                  <i className="bi bi-chevron-right"></i>{" "}
-                  <a href="#">About us</a>
+                    Jobs
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -53,30 +48,19 @@ export const Footer = () => {
             <div className="col-lg-3 col-md-6 footer-links">
               <h4>Information</h4>
               <ul>
-              <li>
-                  <i className="bi bi-chevron-right"></i>{" "}
-                  <a href="#">Terms of service</a>
-                </li>
                 <li>
                   <i className="bi bi-chevron-right"></i>{" "}
-                  <a href="#">Privacy policy</a>
+                  <a href="https://www.termsfeed.com/blog/sample-terms-of-service-template/">Terms of service</a>
                 </li>
                 <li>
-                  <i className="bi bi-chevron-right"></i>{" "}
-                  <a href="#">Conditions of Carriage</a>
-                </li>
-                <li>
-                  <i className="bi bi-chevron-right"></i>{" "}
-                  <a href="#">Frequently asked Questions</a>
+                  <i className="bi bi-chevron-right"></i> <a href="https://www.privacypolicies.com/blog/privacy-policy-template/">Privacy policy</a>
                 </li>
               </ul>
             </div>
 
             <div className="col-lg-4 col-md-6 footer-newsletter">
               <h4>Our Newsletter</h4>
-              <p>
-              Subscribe to our email newsletter to receive updates
-              </p>
+              <p>Subscribe to our email newsletter to receive updates</p>
               <form action="" method="post">
                 <input type="email" name="email" />
                 <input type="submit" value="Subscribe" />
@@ -90,7 +74,7 @@ export const Footer = () => {
         <div class="footer-legal-container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
           <div class="d-flex flex-column align-items-center align-items-lg-start">
             <div class="copyright">
-              &copy; Copyright{" "}
+              &copy; Copyright
               <strong>
                 <span>The Flyest Corp</span>
               </strong>

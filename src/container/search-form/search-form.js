@@ -183,7 +183,7 @@ export const SearchForm = props => {
                 as="select"
                 name="class"
                 placeholder="class"
-                style={!validation.class ? { border: "1px solid red" } : {padding: "0px 10px"}}
+                style={!validation.class ? { border: "1px solid red" } : { padding: "0px 10px" }}
                 onChange={e =>
                   setForm(prev => {
                     return { ...prev, class: e.target.value };
@@ -201,7 +201,7 @@ export const SearchForm = props => {
                 as="select"
                 name="numOfPassengers"
                 placeholder="Number of Passengers"
-                style={!validation.passengers ? { border: "1px solid red" } : {padding: "0px 10px"}}
+                style={!validation.passengers ? { border: "1px solid red" } : { padding: "0px 10px" }}
                 onChange={e =>
                   setForm(prev => {
                     return { ...prev, passengers: e.target.value };
@@ -226,12 +226,12 @@ export const SearchForm = props => {
           <div className="table">
             <table>
               <thead>
-                <tr >
-                  <th style={{ color: "white"}}>Flight Name</th>
-                  <th style={{ color: "white"}}>Departure Time</th>
-                  <th style={{ color: "white"}}>Arrival Time</th>
-                  <th style={{ color: "white"}}>Fare</th>
-                  <th style={{ color: "white"}}>Status</th>
+                <tr>
+                  <th style={{ color: "white" }}>Flight Name</th>
+                  <th style={{ color: "white" }}>Departure Time</th>
+                  <th style={{ color: "white" }}>Arrival Time</th>
+                  <th style={{ color: "white" }}>Fare</th>
+                  <th style={{ color: "white" }}>Status</th>
                   <th></th>
                 </tr>
               </thead>
