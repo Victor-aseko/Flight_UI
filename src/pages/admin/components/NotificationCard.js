@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const NotificationCard = () => {
+export const NotificationCard = ({ notification }) => {
   return (
     <li>
       <Link className="nav-link d-flex align-items-center">
@@ -11,8 +11,10 @@ export const NotificationCard = () => {
           </div>
         </div>
         <div>
-          <span className="d-block text-sm font-semibold">Marie Claire</span>
-          <span className="d-block text-xs text-muted font-regular">Delete booking</span>
+          <span className="d-block text-sm font-semibold">{notification.fullName}</span>
+          <span className="d-block text-xs text-muted font-regular">
+            {notification === "edit" ? "Delete booking reqeust" : "Edit Booking request"}
+          </span>
         </div>
         <div className="ms-auto">
           <i className="bi bi-chat"></i>

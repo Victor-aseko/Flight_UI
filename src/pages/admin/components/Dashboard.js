@@ -1,10 +1,11 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
-function Dashboard({ setEmployeeMatch }) {
+function Dashboard({ setEmployeeMatch, setNotification }) {
   const { user } = useSelector(state => state.authReducer);
+
   const [cards, setCards] = useState([
     { title: "Earnings", icon: "bi bi-credit-card", color: "bg-tertiary", data: "" },
     { title: "Scheduled Flights", icon: "bi bi-credit-card", color: "bg-primary", data: "" },
@@ -12,28 +13,33 @@ function Dashboard({ setEmployeeMatch }) {
     { title: "Employee matches", icon: "bi bi-credit-card", color: "bg-warning", data: "" },
   ]);
   const [summary, setSummary] = useState();
+  const intervalRef = useRef();
 
   useEffect(() => {
-    (async () => {
-      const res = await fetch(`https://flight-booking-server-3zln.vercel.app/flight/get-summary/${user.email}`);
-      const data = await res.json();
-      console.log("============================SUMMARY DATA==========================");
-      console.log(data);
-      if (data.summary) {
-        setSummary(data.summary);
-        setEmployeeMatch(data.summary.jobs);
-        const summaryData = cards.map(c => {
-          if (c.title === "Earnings") return { ...c, data: data.summary.payment };
-          else if (c.title === "Scheduled Flights") return { ...c, data: data.summary.scheduledFlights };
-          else if (c.title === "Flight Hours") return { ...c, data: data.summary.flightHours };
-          else {
-            return { ...c, data: data.summary.employeeMatch };
-          }
-        });
-        setCards(summaryData);
-      }
-    })();
+    fetchData();
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(fetchData, 5000);
   }, []);
+
+  const fetchData = async () => {
+    const res = await fetch(`https://flight-booking-server-3zln.vercel.app/flight/get-summary/${user.email}`);
+    const data = await res.json();
+    if (data.summary) {
+      setSummary(data.summary);
+      setEmployeeMatch(data.summary.jobs);
+      const notification = data.summary.booking.filter(b => b.status === "edit" || b.status === "delete");
+      if (notification.length > 0) setNotification(notification);
+      const summaryData = cards.map(c => {
+        if (c.title === "Earnings") return { ...c, data: data.summary.payment };
+        else if (c.title === "Scheduled Flights") return { ...c, data: data.summary.scheduledFlights };
+        else if (c.title === "Flight Hours") return { ...c, data: data.summary.flightHours };
+        else {
+          return { ...c, data: data.summary.employeeMatch };
+        }
+      });
+      setCards(summaryData);
+    }
+  };
 
   const deleteBooking = async b => {
     const res = await fetch(`https://flight-booking-server-3zln.vercel.app/flight/delete`, {

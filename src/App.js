@@ -36,7 +36,7 @@ const App = () => {
         <Route path="/Admin" element={renderRestrictedComponent(Admin)} />
         <Route path="/TicketEdit" element={renderRestrictedComponent(TicketEditing)} />
 
-        <Route path="/AddPassenger" element={renderRestrictedComponent(AddPassenger)} />
+        {/* <Route path="/AddPassenger" element={renderRestrictedComponent(AddPassenger)} /> */}
         <Route path="/Jobs" element={renderRestrictedComponent(Jobs)} />
         <Route path="/Apply" element={renderRestrictedComponent(Application)} />
         <Route path="/Bookings" element={renderRestrictedComponent(Bookings)} />

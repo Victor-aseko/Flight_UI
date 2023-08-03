@@ -3,7 +3,7 @@ import { NotificationCard } from "./NotificationCard";
 import { Link } from "react-router-dom";
 import logo from "../../../img/logo.png";
 
-function Sidebar({ setActiveTab }) {
+function Sidebar({ setActiveTab, notification }) {
   return (
     <nav
       className="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-bottom border-bottom-lg-0 border-end-lg"
@@ -66,11 +66,11 @@ function Sidebar({ setActiveTab }) {
               </Link>
             </li>
 
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link className="nav-link" href="#" onClick={() => setActiveTab("inquiries")}>
                 <i className="bi bi-bookmarks"></i> Inquiries
               </Link>
-            </li>
+            </li> */}
           </ul>
 
           <hr className="navbar-divider my-5 opacity-20" />
@@ -79,12 +79,12 @@ function Sidebar({ setActiveTab }) {
             <li>
               <div className="nav-link text-xs font-semibold text-uppercase text-muted ls-wide" href="#">
                 Notifications
-                <span className="badge bg-soft-primary text-primary rounded-pill d-inline-flex align-items-center ms-4">13</span>
+                <span className="badge bg-soft-primary text-primary rounded-pill d-inline-flex align-items-center ms-4">{notification.length}</span>
               </div>
             </li>
-            <NotificationCard />
-            <NotificationCard />
-            <NotificationCard />
+            {notification.map(n => {
+              return <NotificationCard notification={n} />;
+            })}
           </ul>
           <div className="mt-auto"></div>
         </div>

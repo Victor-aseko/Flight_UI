@@ -18,9 +18,7 @@ const images = [
 export const Jobs = () => {
   const [selectedJob, setSelectedJob] = useState(null);
   const [jobs, setJobs] = useState([]);
-
   const nav = useNavigate();
-
   useEffect(() => {
     (async () => {
       const res = await fetch("https://flight-booking-server-3zln.vercel.app/flight/jobs", {

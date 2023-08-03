@@ -11,6 +11,7 @@ export function Admin() {
   const user = useSelector(state => state.authReducer.user);
   const [activeTab, setActiveTab] = useState("dashboard");
   const [employeeMatch, setEmployeeMatch] = useState([]);
+  const [notification, setNotification] = useState([]);
   //EmployeeMatching inquiries'
   const nav = useNavigate();
   useEffect(() => {
@@ -22,15 +23,15 @@ export function Admin() {
   return (
     <div className="App">
       <div className="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
-        <Sidebar setActiveTab={setActiveTab} />
-        <div className="h-screen flex-grow-1 overflow-y-lg-auto">{getView(activeTab, setEmployeeMatch, employeeMatch)}</div>
+        <Sidebar setActiveTab={setActiveTab} notification={notification} />
+        <div className="h-screen flex-grow-1 overflow-y-lg-auto">{getView(activeTab, setEmployeeMatch, employeeMatch, setNotification)}</div>
       </div>
     </div>
   );
 }
 
-const getView = (tab, setEmployeeMatch, employeeMatch) => {
-  if (tab === "dashboard") return <Dashboard setEmployeeMatch={setEmployeeMatch} />;
+const getView = (tab, setEmployeeMatch, employeeMatch, setNotification) => {
+  if (tab === "dashboard") return <Dashboard setEmployeeMatch={setEmployeeMatch} setNotification={setNotification} />;
   else if (tab === "employeeMatching") return <EmployeeMatching employeeMatch={employeeMatch} />;
   else return <Inquiries />;
 };
