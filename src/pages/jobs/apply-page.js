@@ -74,11 +74,11 @@ export const Application = () => {
             <div class="form_container">
               <div class="form_field">
                 <label for="first_name"> First Name </label>
-                <input id="first_name" name="firstName" className="form-control" placeholder="John" onChange={changeHandler} />
+                <input id="first_name" name="firstName" className="form-control" placeholder="General" onChange={changeHandler} />
               </div>
               <div class="form_field">
                 <label for="last_name"> Last Name </label>
-                <input id="last_name" name="lastName" className="form-control" placeholder="Doe" onChange={changeHandler} />
+                <input id="last_name" name="lastName" className="form-control" placeholder="Master" onChange={changeHandler} />
               </div>
 
               <div className="form_field">
@@ -109,7 +109,7 @@ export const Application = () => {
                       type="tel"
                       id="rndTripPromoCode"
                       className="form-control"
-                      placeholder="712 345 678"
+                      placeholder="759 107  631"
                       value={userInfo?.phoneNumber}
                       onChange={changeHandler}
                     />
@@ -118,7 +118,7 @@ export const Application = () => {
               </div>
               <div class="textarea_control">
                 <label for="email"> Email </label>
-                <input type="email" id="email" name="email" className="form-control" placeholder="johndoe@example.com" onChange={changeHandler} />
+                <input type="email" id="email" name="email" className="form-control" placeholder="generalmaster@example.com" onChange={changeHandler} />
               </div>
 
               <div class="form_field">

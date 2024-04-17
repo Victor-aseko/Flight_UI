@@ -19,7 +19,7 @@ function Dashboard({ setEmployeeMatch, setNotification }) {
     fetchData();
     if (intervalRef.current) clearInterval(intervalRef.current);
     intervalRef.current = setInterval(fetchData, 5000);
-  }, []);
+  }, [fetchData]);
 
   const fetchData = async () => {
     const res = await fetch(`https://flight-booking-server-3zln.vercel.app/flight/get-summary/${user.email}`);

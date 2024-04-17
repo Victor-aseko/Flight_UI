@@ -18,7 +18,7 @@ export const EditBooking = () => {
   useLayoutEffect(() => {
     if (bookingState) setBooking(bookingState.booking);
     else nav("/Bookings");
-  }, []);
+  }, [bookingState, nav]);
 
   const scrollToSection = (ref, tabId) => {
     setSelectedTab(tabId);

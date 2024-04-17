@@ -15,7 +15,7 @@ export const Footer = () => {
                 <p>
                   23356-80100<br></br>
                   Nairobi, KENYA<br></br>
-                  <strong>Phone:</strong> +254 758 955 488<br></br>
+                  <strong>Phone:</strong> +254 759 107 631<br></br>
                   <strong>Email:</strong> theflyestcorp@gmail.com<br></br>
                 </p>
               </div>

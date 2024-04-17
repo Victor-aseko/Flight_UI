@@ -1,5 +1,4 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { Header } from "../../components/header/header";
 import { Footer } from "../../components/footer/footer";
 import SearchForm from "../../container/search-form/search-form";

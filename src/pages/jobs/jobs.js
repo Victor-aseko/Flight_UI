@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Header } from "../../components/header/header";
-import { Footer } from "../../components/footer/footer";
+
 import "./style.css";
 const images = [
   "https://www.pexels.com/photo/photo-of-airplane-1928068/",

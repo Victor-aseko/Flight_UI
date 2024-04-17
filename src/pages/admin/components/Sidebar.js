@@ -28,7 +28,7 @@ function Sidebar({ setActiveTab, notification }) {
         </Link>
         <div className="navbar-user d-lg-none">
           <div className="dropdown">
-            <a id="sidebarAvatar" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <Link id="sidebarAvatar" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <div className="avatar-parent-child">
                 <img
                   alt="Placeholder"
@@ -37,7 +37,7 @@ function Sidebar({ setActiveTab, notification }) {
                 />
                 <span className="avatar-child avatar-badge bg-success"></span>
               </div>
-            </a>
+            </Link>
 
             <div className="dropdown-menu dropdown-menu-end" aria-labelledby="sidebarAvatar">
               <Link className="dropdown-item" onClick={() => setActiveTab("dashboard")}>
