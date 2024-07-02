@@ -15,14 +15,10 @@ function Dashboard({ setEmployeeMatch, setNotification }) {
   const [summary, setSummary] = useState();
   const intervalRef = useRef();
 
-  useEffect(() => {
-    fetchData();
-    if (intervalRef.current) clearInterval(intervalRef.current);
-    intervalRef.current = setInterval(fetchData, 5000);
-  }, [fetchData]);
+  
 
   const fetchData = async () => {
-    const res = await fetch(`https://flight-booking-server-3zln.vercel.app/flight/get-summary/${user.email}`);
+    const res = await fetch(`https://flight-booking-server-sand.vercel.app/flight/get-summary/${user.email}`);
     const data = await res.json();
     if (data.summary) {
       setSummary(data.summary);
@@ -42,7 +38,7 @@ function Dashboard({ setEmployeeMatch, setNotification }) {
   };
 
   const deleteBooking = async b => {
-    const res = await fetch(`https://flight-booking-server-3zln.vercel.app/flight/delete`, {
+    const res = await fetch(`https://flight-booking-server-sand.vercel.app/flight/delete`, {
       method: "POST",
       body: JSON.stringify({ id: b._id }),
       headers: {
@@ -59,6 +55,12 @@ function Dashboard({ setEmployeeMatch, setNotification }) {
     console.log("=============================delete reponse================================");
     console.log(data);
   };
+  useEffect(() => {
+    fetchData();
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(fetchData, 5000);
+  }, [fetchData]);
+
   return (
     <>
       <header className="bg-surface-primary border-bottom pt-6">

@@ -40,7 +40,7 @@ export const Payment = ({ setSelectedTab }) => {
         return setShowPop(true);
       }
 
-      const res = await fetch("https://flight-booking-server-3zln.vercel.app/flight/create-booking", {
+      const res = await fetch("https://flight-booking-server-sand.vercel.app/flight/create-booking", {
         method: "POST",
         body: JSON.stringify(jsonObj(pendingBooking, passengers, seatsSelected)),
         headers: { "Content-Type": "application/json" },
@@ -106,7 +106,7 @@ export const Payment = ({ setSelectedTab }) => {
                   <input
                     id="credit-card-num"
                     className="form-control"
-                    placeholder="1111-2222-3333-4444"
+                    placeholder="1111"
                     type="number"
                     name="cardNumber"
                     style={{ border: !validation.cardNumber ? "1px solid red" : "" }}

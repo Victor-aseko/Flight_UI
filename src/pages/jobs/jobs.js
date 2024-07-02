@@ -21,7 +21,7 @@ export const Jobs = () => {
   const nav = useNavigate();
   useEffect(() => {
     (async () => {
-      const res = await fetch("https://flight-booking-server-3zln.vercel.app/flight/jobs", {
+      const res = await fetch("https://flight-booking-server-sand.vercel.app/flight/jobs", {
         headers: { "Content-Type": "application/json" },
       });
       const data = await res.json();

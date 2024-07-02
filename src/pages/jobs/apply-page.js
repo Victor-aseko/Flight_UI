@@ -38,7 +38,7 @@ export const Application = () => {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    const res = await fetch(`https://flight-booking-server-3zln.vercel.app/flight/create-application`, {
+    const res = await fetch(`https://flight-booking-server-sand.vercel.app/flight/create-application`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

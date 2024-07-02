@@ -19,7 +19,7 @@ export const EmployeeMatching = ({ employeeMatch }) => {
   }, [employeeMatch]);
 
   const changeStatusEmployeee = async (application, action) => {
-    const res = await fetch(`https://flight-booking-server-3zln.vercel.app/flight/update-application`, {
+    const res = await fetch(`https://flight-booking-server-sand.vercel.app/flight/update-application`, {
       method: "POST",
       body: JSON.stringify({ id: application._id, status: action }),
       headers: {

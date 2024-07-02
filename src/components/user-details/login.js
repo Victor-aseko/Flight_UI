@@ -14,7 +14,7 @@ const LoginForm = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     // Perform login logic here
-    const res = await fetch(`https://flight-booking-server-3zln.vercel.app/user/login`, {
+    const res = await fetch(`https://flight-booking-server-sand.vercel.app/user/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

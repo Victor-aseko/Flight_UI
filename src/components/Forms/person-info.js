@@ -94,7 +94,7 @@ export const PersonlInfo = ({ setSelectedTab, tab, action, booking }) => {
   };
 
   const focusHandler = () => {
-    setValid({ title: true, firstName: true, lastName: true, dob: true });
+    setValid({ title:true, firstName: true, lastName: true, dob: true });
   };
 
   const Edithandler = async () => {
@@ -105,7 +105,7 @@ export const PersonlInfo = ({ setSelectedTab, tab, action, booking }) => {
       id: passengerBookings._id,
     };
     console.log(jsonObj);
-    const res = await fetch("https://flight-booking-server-3zln.vercel.app/flight/inquire-edit", {
+    const res = await fetch("https://flight-booking-server-sand.vercel.app/flight/inquire-edit", {
       method: "POST",
       body: JSON.stringify(jsonObj),
       headers: { "Content-Type": "application/json" },
@@ -146,6 +146,7 @@ export const PersonlInfo = ({ setSelectedTab, tab, action, booking }) => {
                   <option>Mr.</option>
                   <option>Mrs.</option>
                   <option>Miss</option>
+                  <option>Dr.</option>
                 </Form.Control>
               </div>
 
@@ -331,7 +332,7 @@ export const PersonlInfo = ({ setSelectedTab, tab, action, booking }) => {
                     return (
                       <tr key={index.toString()}>
                         <td>{fName}</td>
-                        <td>${lName}</td>
+                        <td>{lName}</td>
                         <td>{passenger.dob}</td>
                         <td class="options-cell" style={{ position: "relative", padding: "1rem 0rem" }}>
                           <span class="vertical-dots" style={{ cursor: "pointer", fontSize: "18px" }} onclick={() => {}}>
@@ -382,7 +383,7 @@ export const PersonlInfo = ({ setSelectedTab, tab, action, booking }) => {
                     return (
                       <tr key={index.toString()}>
                         <td>{passenger.firstName}</td>
-                        <td>${passenger.lastName}</td>
+                        <td>{passenger.lastName}</td>
                         <td>{passenger.dob}</td>
                       </tr>
                     );
