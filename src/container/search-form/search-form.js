@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { bookingActions } from "../../store/bookingSlice";
 import jsonData from "../../MOCK_DATA.json";
 
+const today = new Date().toISOString().split("T")[0];
 export const SearchForm = props => {
   const [isReturn, setFlightType] = useState(false);
   const [airPorts, setAirports] = useState({ origin: [], destination: [] });
@@ -15,7 +16,8 @@ export const SearchForm = props => {
   const [showTimetable, setShowTimetable] = useState(false);
   const [form, setForm] = useState({ origin: "", destination: "", passengers: 1, departureTime: "", class: "Executive" });
   const [validation, setValidation] = useState({ origin: true, destination: true, passengers: true, departureTime: true, class: true });
-
+   
+  
   const [msg, setMsg] = useState("");
   const navigation = useNavigate();
   const dispatch = useDispatch();
@@ -159,6 +161,7 @@ export const SearchForm = props => {
                 type="date"
                 name="dateOfDep"
                 placeholder="yyyy-mm-dd"
+                min= {today}
                 required={true}
                 style={!validation.departureTime ? { border: "1px solid red" } : {}}
                 onChange={e =>
@@ -173,7 +176,7 @@ export const SearchForm = props => {
             {isReturn && (
               <div className="form-group">
                 <label>Return Date</label>
-                <Form.Control type="date" name="dateOfReturn" placeholder="yyyy-mm-dd" />
+                <Form.Control type="date" name="dateOfReturn" placeholder="yyyy-mm-dd"  min={today} />
               </div>
             )}
 
@@ -182,7 +185,7 @@ export const SearchForm = props => {
               <Form.Control
                 as="select"
                 name="class"
-                placeholder="class"
+                placeholder="class"              
                 style={!validation.class ? { border: "1px solid red" } : { padding: "0px 10px" }}
                 onChange={e =>
                   setForm(prev => {
@@ -239,7 +242,7 @@ export const SearchForm = props => {
                 {searchResult.map((flight, index) => {
                   const match = new Date(flight.departureTime).toLocaleDateString() === new Date(form.departureTime).toLocaleDateString();
                   const price = flight.price[form.class.toLowerCase()] ? flight.price[form.class.toLowerCase()] : flight.price.low;
-                  const time = new Date(new Date(flight.departureTime).getTime() + +flight.flightTime * 60 * 60 * 1000);
+                  const time = new Date(new Date(flight.departureTime).getTime() + flight.flightTime * 60 * 60 * 1000);
                   return (
                     <tr key={index.toString()}>
                       <td>{flight.flightName}</td>

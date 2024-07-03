@@ -12,7 +12,7 @@ import { bookingActions } from "../../store/bookingSlice";
 import { Pop } from "../pop/pop";
 
 export const Payment = ({ setSelectedTab }) => {
-  const { seatsSelected, bookingUserInfo: passengers, pendingBooking } = useSelector(state => state.bookingReducer);
+  const { seatsSelected, bookingUserInfo: passengers, pendingBooking } = useSelector((state) => state.bookingReducer);
   const [validation, setValidation] = useState({ cardHolderFullName: true, cardNumber: true, cvv: true });
   const [paymentForm, setPaymentForm] = useState({
     cardHolderFullName: "",
@@ -21,11 +21,13 @@ export const Payment = ({ setSelectedTab }) => {
     year: "",
     cvv: "",
   });
+  const [availableYears, setAvailableYears] = useState(["2024", "2025", "2026", "2027"]);
   const [showPop, setShowPop] = useState(false);
 
   const okHandler = () => setShowPop(false);
   const dispatch = useDispatch();
-  const submitHandler = async e => {
+
+  const submitHandler = async (e) => {
     try {
       e.preventDefault();
       const validationObj = {
@@ -34,7 +36,7 @@ export const Payment = ({ setSelectedTab }) => {
         cvv: !!paymentForm.cvv,
       };
       setValidation(validationObj);
-      const isValid = Object.values(validationObj).every(isValid => isValid);
+      const isValid = Object.values(validationObj).every((isValid) => isValid);
       if (!isValid) return;
       if (+pendingBooking.passengers !== passengers.length || seatsSelected.length !== +pendingBooking.passengers) {
         return setShowPop(true);
@@ -64,27 +66,47 @@ export const Payment = ({ setSelectedTab }) => {
     }
   };
 
-  const changeHandler = e => {
+  const changeHandler = (e) => {
     const { value, name } = e.target;
 
-    setPaymentForm(prev => {
+    setPaymentForm((prev) => {
       return { ...prev, [name]: value };
     });
   };
+
+  const monthChangeHandler = (e) => {
+    const selectedMonth = e.target.value;
+    setPaymentForm((prev) => {
+      return { ...prev, month: selectedMonth };
+    });
+
+    if (["January", "February", "March", "April", "May", "June"].includes(selectedMonth)) {
+      setAvailableYears(["2025", "2026", "2027"]);
+    } else {
+      setAvailableYears(["2024", "2025", "2026", "2027"]);
+    }
+  };
+
+  const yearChangeHandler = (e) => {
+    const selectedYear = e.target.value;
+    setPaymentForm((prev) => {
+      return { ...prev, year: selectedYear };
+    });
+  };
+
   const focusHandler = () => {
     setValidation({ cardHolderFullName: true, cardNumber: true, month: true, year: true, cvv: true });
   };
+
   const img = [visa, mastercard, discover, paypal, mpesa];
+
   return (
     <div className="payment-container">
       <div className="form-content">
         <div className="payment-wrapper">
           <div className="tab-wrapper">
             <form encType="text/plain" method="get" target="_blank" onSubmit={submitHandler}>
-              <div className="cards">
-                {/* <p>Accepted cards:</p> */}
-                {cards(img)}
-              </div>
+              <div className="cards">{cards(img)}</div>
               <div className="fieldset half">
                 <div className="field">
                   <label htmlFor="full-name">Card Holder Full Name</label>
@@ -127,26 +149,22 @@ export const Payment = ({ setSelectedTab }) => {
                         style={{ width: "100%", padding: "0px 10px" }}
                         className="form-control"
                         name="month"
-                        onChange={e =>
-                          setPaymentForm(prev => {
-                            return { ...prev, month: e.target.value };
-                          })
-                        }
+                        onChange={monthChangeHandler}
                         onFocus={focusHandler}
                       >
                         <option value="">Month:</option>
-                        <option value="">January</option>
-                        <option value="">February</option>
-                        <option value="">March</option>
-                        <option value="">April</option>
-                        <option value="">May</option>
-                        <option value="">June</option>
-                        <option value="">July</option>
-                        <option value="">August</option>
-                        <option value="">September</option>
-                        <option value="">October</option>
-                        <option value="">November</option>
-                        <option value="">Decemeber</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
                       </select>
                     </div>
                     <div className="field">
@@ -156,22 +174,19 @@ export const Payment = ({ setSelectedTab }) => {
                         style={{ width: "100%", padding: "0px 10px" }}
                         className="form-control"
                         name="year"
-                        onChange={e =>
-                          setPaymentForm(prev => {
-                            return { ...prev, year: e.target.value };
-                          })
-                        }
+                        onChange={yearChangeHandler}
                         onFocus={focusHandler}
                       >
                         <option value="">Year</option>
-                        <option value="">2023</option>
-                        <option value="">2024</option>
-                        <option value="">2025</option>
-                        <option value="">2026</option>
+                        {availableYears.map((year) => (
+                          <option key={year} value={year}>
+                            {year}
+                          </option>
+                        ))}
                       </select>
                     </div>
                     <div className="field">
-                      <label for="cvv">CVV</label>
+                      <label htmlFor="cvv">CVV</label>
                       <input
                         style={{ width: "100%", border: !validation.cvv ? "1px solid red" : "" }}
                         id="cvv"
@@ -202,7 +217,6 @@ export const Payment = ({ setSelectedTab }) => {
                 value="Next"
                 id="round_trip_btn"
                 className="btn-primary btn-submit-form btn-rnd-trip"
-                // onClick={handlerSubmit}
               >
                 Pay Now
               </button>
@@ -240,10 +254,30 @@ const jsonObj = (pendingBooking, passengers, seatsSelected) => {
     seatBooked: seatsSelected,
   };
 };
-const cards = data => {
+
+const cards = (data) => {
   return data.map((card, index) => (
     <div key={index} className="card-logos">
       <img src={card} alt={"card"} style={data.length === index + 1 ? { height: " 64px", width: "74px" } : {}} />
     </div>
   ));
 };
+
+// Lipa na MPesa
+// </label>
+// </div>
+// {paymentMethod === "mpesa" ? (
+// <div className="field">
+//   <label htmlFor="mpesa-phone">Phone Number</label>
+//   <input
+//     id="mpesa-phone"
+//     className="form-control"
+//     placeholder="Enter MPesa phone number"
+//     name="phoneNumber"
+//     type="tel"
+//     style={{ border: !validation.phoneNumber ? "1px solid red" : "" }}
+//     value={paymentForm.phoneNumber}
+//     onChange={changeHandler}
+//     onFocus={focusHandler}
+//   />
+// </div>

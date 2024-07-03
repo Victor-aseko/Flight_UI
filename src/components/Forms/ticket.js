@@ -53,7 +53,8 @@ export const Ticket = () => {
                 <div>
                   <p>
                     <span>Arrives</span>
-                    {new Date(flight.departureTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true })}
+                    {/* {new Date(flight.departureTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true })} */}
+                    {new Date(new Date(flight.departureTime).getTime() + flight.flightTime * 60 * 60 * 1000).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true })}
                   </p>
                 </div>
               </div>
