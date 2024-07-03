@@ -193,10 +193,17 @@ export const Payment = ({ setSelectedTab }) => {
                         className="form-control"
                         placeholder="415"
                         type="text"
-                        name="cvv"
+                        name="cvv"                        
+                        maxLength="3"
+                        pattern="\d{3}"
                         value={paymentForm.cvv}
                         onFocus={focusHandler}
-                        onChange={changeHandler}
+                        onChange={e => {
+                          const { value } = e.target;
+                          if (/^\d{0,3}$/.test(value)) {
+                            changeHandler(e);
+                          }
+                        }}
                       />
                     </div>
                     <div className="field">

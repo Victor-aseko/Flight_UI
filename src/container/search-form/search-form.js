@@ -248,7 +248,7 @@ export const SearchForm = props => {
                       <td>{flight.flightName}</td>
                       <td>{DateTime(flight.departureTime)}</td>
                       <td>{DateTime(time)}</td>
-                      <td>${price}</td>
+                      <td>Kshs {price}</td>
                       <td style={{ color: match ? "green" : "orange" }}>{match ? "Match!" : "Recommended"}</td>
                       <td>
                         <button onClick={() => handleButtonClick(flight)}>Book</button>
